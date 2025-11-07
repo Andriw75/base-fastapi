@@ -37,7 +37,10 @@ class AuthRouter:
 
     def _init_routes(self):
         """Define todas las rutas del router de autenticación."""
-        self.router.get("/me", response_model=UserResponse)(self.me)
+        @self.router.get("/me", response_model=UserResponse)
+        async def me(current_user=Depends(self.get_current_user)):
+            return await self.me(current_user)
+        
         self.router.post("/token")(self.token)
         self.router.post("/logout")(self.logout)
 
@@ -83,7 +86,6 @@ class AuthRouter:
                         # secure=True,
                         # samesite='none',
                     )
-
             return UserDb(**payload)
 
         except Exception:

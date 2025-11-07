@@ -80,6 +80,6 @@ class UserService(IDataUser):
         hashed = bcrypt.hashpw(password.encode('utf-8'), salt)
         return hashed.decode('utf-8')
 
-    def get_user(self, user_name: str) -> UserResponse|None:
+    async def get_user(self, user_name: str) -> UserResponse|None:
         return self._users_db.get(user_name,None)
 
