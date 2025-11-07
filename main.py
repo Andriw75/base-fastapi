@@ -8,5 +8,5 @@ def main():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app,host='192.168.68.96',port=2000)
+    uvicorn.run(app,host='0.0.0.0', port=8000)
 
